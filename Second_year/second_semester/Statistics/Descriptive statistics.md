@@ -138,6 +138,7 @@ n = 2000
 | 2 | 200 | 0.1 | 300 | 0.15 |
 | 3 | 1600 | 0.8 | 1800 | 0.95 |
 | 4 | 100 | 0.05 | 2000 | 1 |
+
 ```chart
 	type: bar
 	labels: [1,2,3,4]
@@ -152,6 +153,7 @@ n = 2000
 | 40 | 0.45 | 0.45 |
 | 50 | 0.35 | 0.8 |
 | 60 | 0.2 | 1 |
+
 - Average  $\rightarrow \text{\=X} = 40 * 0.45 + 50 * 0.35 + 60  * 0.2 = 47.5$
 - Median   $\rightarrow$ We look into the freq table for the value 0.5. As it does not appear, we take the next bigger value (Me = 50)
 ### Ex 9
@@ -167,6 +169,7 @@ $f_{i} = \frac{n_{i}}{n}$   $F_{i} = \frac{N_{i}}{n}$
 | 3 | 22 | 0.44 | **40** | 0.8 |
 | 4 | **6** | 0.12 | 46 | 0.92 |
 | 5 | 4 | 0.08 | 50 | 1 |
+
 Mode = 3      Me = 3      Mean = $\frac{0 * 0.8 + 1 * 0.1 + 2 * 0.18 + 3 * 0. 44 + 4 * 0.12 + 5 * 0.08}{50}$ = 2.66
 
 ### Ex 10
@@ -181,6 +184,7 @@ Freq. table
 | 1 | 4 | 0.2 | 13 | 0.65 |
 | 2 | 3 | 0.15 | 16 | 0.8 |
 | 3 | 4 | 0.2 | 20 | 1 |
+
 Pie chart
 To obtain the degrees corresponding to each value by multiplying 360\*fi
 
@@ -202,6 +206,7 @@ Table of frequencies:
 | 6 | 4 | 0.133 | 26 | 0.866 |
 | 9 | 1 | 0.033 | 27 | 0.966 |
 | 10 | 3 | 0.1 | 30 | 1 |
+
 Mode = 3
 Median = 3, since $F_{2} < 0.5 < F_{3}$
 $P_{35}$ = $q_{0.35}$, $\alpha = 0.35$ = 2, since  $F_{1} < 0.35 < F_{2}$
@@ -213,6 +218,7 @@ $$\text{\=X = } \frac{-1*1 + ... + 10*3}{30} = 3.67 $$
 | mean | sd | 0% | 25% | 50% | 75% | 100% | n |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 55.9 | 56.53001 | 4.4 | 22.2 | 36.6 | 73.7 | 209.9 | 101 |
+
 a) Mean and median
 	Mean = 55.9, Median = 36.6
 b) 
