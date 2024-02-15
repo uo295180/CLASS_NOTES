@@ -1,4 +1,3 @@
-
 # Prev Lab 1
 
 ## Comments
@@ -406,7 +405,7 @@ Interfaces provide **multiple subtyping**. Therefore, a class or interface may d
 
 By convention, interface identifiers starts by I. Also, interfaces cannot have class (**static**) members
 
-## IDisposable
+### IDisposable
 
 It's an interface in the System namespace with just one ***Dispose*** method. It's responsible of releasing the additional resources managed by the object. Every *.Net* class that manages additional resources should implement this interface.
 Commonly, a class that defines a destructor also implements IDisposable, where dispose is called by the destructor.
@@ -443,7 +442,7 @@ using(File file = new File("input.txt")){
 } // The file is closed (Dispose is invoked)
 ```
 
-## Explicit interface implementation
+### Explicit interface implementation
 
 Considering the following scenario:
 ```C#
@@ -463,3 +462,315 @@ class C : I1, I2 {
 
 [Mandatory activity](https://www.artima.com/articles/composition-versus-inheritance)
 
+## Exceptions
+
+**Exceptions** are objects holding essential information about an exceptional situation occurred at runtime. In C\#, they must be **System.Exception**. Structs cannot be thrown. 
+Application specific exceptions should derive from **System.ApplicationException** and they do not represent fatal application errors.
+The **System.SystemException** class is used to differentiate between exceptions defined by the system versus exceptions defined by applications.
+
+### Throwing Exceptions (C\#)
+
+They're raised with the **throw** keyword, followed by an **Exception** instance. C# methods does not specify the exceptions they may throw. Therefore, in C# it's not mandatory to handle any exception.
+
+### Handling Exceptions
+
+They're handled with **try** and **catch** blocks:
+- **try** block: Code may throw an exception
+- **catch** block: Exception handling code. There could be many **catch** blocks for one **try** block
+- **finally** block is always executed
+	- When no exception is thrown
+	- When the exception thrown is handled in a **catch** block
+	- When the exception thrown is not handled
+
+### Handling Any Exception
+
+C# provides **parameterless catch** blocks (like C++), so that any exception is handled. It also provides **parameterless throw** to re-throw caught exceptions.
+```C#
+public static void m(string s){
+	switch(s) {
+		case "1": throw new Exception(s);
+		case "2": throw new ApplicationException(s);
+		case "3": throw new SystemException(s);
+	}
+}
+
+public static void Main(string[] args){
+	try { m(args[0]); }
+	catch {
+		Console.Error.WriteLine("We handle and re-throw it");
+		throw;
+	}
+}
+```
+
+### Unhandled Exceptions
+
+In .Net, an unhandled exception shows in the standard error output:
+- The type of exception thrown
+- It **Message** property
+- Its **StackTrace** property
+
+## Cleaning up resources in C\#
+
+The following C# program
+```C#
+private void Process(TextWriter file){
+	// Method that process a file
+	file.Write("hello"); // no flush
+	// .... an exception can be thrown
+	throw new Exception();
+}
+private void Resources(string fileName){
+	TextWriter file = new StreamWriter(filename);
+	// * The file is processed
+	Process(file);
+	file.Close();
+}
+private void run() {
+	try {
+		Resources("wrongManagement.txt");
+	} catch (Exception){
+		Console.Error.WriteLine("Exception handled.");
+	}
+}
+```
+
+This code does not clean up the resources allocated (the file is not closed). The exception can be handled in the following way:
+
+```C#
+private void NonMaintainable(String fileName){
+	TextWriter file = new StreamWriter(fileName);
+	// * The file is processed
+	try{
+		Process(file);
+	}
+	catch(Exception e) {
+		file.Close();
+		throw e;
+	}
+	file.Close(); // * Repeated code
+}
+```
+
+But the file must be closed in every single **catch**. This solution is not very maintainable. 
+For this reason, the **finally** was added:
+
+```C#
+private void Maintainable(String fileName) {
+	TextWriter file = new StreamWriter(fileName);
+	// * The file is processed
+	try{
+		Process(file);
+	} 
+	finally{
+		// * Resources are cleaned up only here
+		file.Close();
+	}
+}
+```
+
+Although C# provides destructors that might be used to clean up resources in come occasions (sometimes we need a deterministic cleaning up, so destructors are not a suitable mechanism in these cases)
+
+## Assertions in C\#
+
+They're conditions that must be true in the correct execution of a program
+- In case they're false, it's due to a **programming error**
+- They're only used in the **development cycle**
+- They should be **transparently removed in the release version**
+**Conditional compilation** is a widespread technique used to provide assertions
+
+```C#
+#if DEBUG
+	Console.WriteLine("Debug mode");
+#else
+	Console.WriteLine("Release mode");
+#endif
+```
+
+## Assertions in .Net
+
+They're provided by the **Debug** class in the **System.Diagnostics** namespace
+
+```C#
+Assert(bool, [string message, [string detailedMessage]])
+```
+
+It uses conditional compilation, so if the **DEBUG** macro is not defined, the assert code is not compiled
+
+## Preconditions in .Net
+
+Preconditions can be grouped into one of the following types:
+- The **argument values** are not appropriate
+- The method invoked cannot be executed in the current **state of the object** (this)
+For this cases, C\# provides the following exceptions in the **System** namespace
+- **ArgumentException** for the argument preconditions
+- **InvalidOperationException** for the object state preconditions
+
+## Programming by contract: Pre/Postconditions and invariants
+
+```C#
+public void AddUser(string userName, string plainPassword, UserData data) {
+	// INAVARIANT: Always at the beginning of a method (except constructors). Is object consistent?
+	Invariant();
+	int previousUserCount = GetUserCount();
+	
+	// PRECONDITIONS are not always wrong parameters: object can be in an invalid state. InvalidOperationException is used
+	if(UserFileIsLocked()) 
+		throw new InvalidOperationException("The file is temporally inaccessible");
+		
+	// If arguments have incorrect value, ArgumentException is used
+	if(!validUserName(userName))
+		throw new ArgumentException("User name is invalid: please use a non-existing, non-null user name");
+		
+	if (plainPassword.Length < 10)
+		throw new ArgumentException("The password size must be at least 10");
+		
+	if (!PasswordWithEnoughComplexity(plainPassword))
+		throw new ArgumentException("Password must have at least one upper and lowercase char, number and symbol");
+		
+	if (data == null)
+		throw new ArgumentException(("Extra user data cannot be null");
+	
+	//TIP: We can create our own exceptions (inheriting from the Exception class) for this, but normally 
+	//ArgumentException and InvalidOpeationException are enough for most cases
+	
+	//Do the work: add user name and data, encrypting the password
+	_AddUser(userName, plainPassword, data);
+	
+	//POSTCONDITION of this method (invariants are object-scoped, postconditions are method-scoped)
+	Debug.Assert(GetUserCount() == previousUserCount + 1);
+	
+	//INVARIANT check: Also, always end of a method (leave object consistent)
+	Invariant();
+}
+
+private void Invariant(){
+	//User file cannot get corrupt during the whole execution
+	Debug.Assert(CheckUserFileIntegrity());
+}
+```
+
+
+# Prev Lab 4
+
+## Generics (Genericity)
+
+**Generics** allows writing abstraction pattern valid for multiple types. The two main benefits are:
+- Better robustness
+- Better runtime performance
+
+Since C# 2.0 permits the generic implementation of:
+- Classes
+- Structs
+- Methods
+- Interfaces
+- Delegates
+
+## default(T)
+
+Generic types in C# include built-in types. Sometimes it's necessary to assign or return the default value of a generic T type. If we have *T variable;* , the assignment *variable=null;* would not be valid as T can be a built-in type (int, char, ...)
+C# provides the **default** keyword for this reason. It returns **null** if T is an object or **0**, **'\\0'** or **false** if it's a built-in type
+
+### Generic Methods
+
+```C#
+class Generics {
+	public static T ConvertReference<T> (Object reference){
+		if(!(reference is T))
+			return default(T); // default value for T type
+		return (T) reference;
+	}
+	public static void Main() {
+		Object myString = "hello", myInteger = 3;
+		// Correct conversions
+		Console.WriteLine(ConvertReference<String>(myString));
+		Console.WriteLine(ConvertReference<int>(myInteger));
+		// Wrong conversions
+		Console.WriteLine(ConvertReference<int>(myString));
+		Console.WriteLine(ConvertReference<String>(myInteger));
+	}
+}
+```
+
+### Generic Classes
+
+```C#
+class GenericClass<T> {
+	private T field;
+	public GenericClass(T field){
+		set(field);
+	}
+	public T get(){
+		return field;
+	}
+	public void set(T field){
+		this.field = field;
+	}
+}
+
+class Run {
+	public static void Main(){
+		GenericClass<int> myInteger = new GenericClass<int>(3);
+		Console.WriteLine(myInteger.get());
+		GenericClass<string> myString = new GenericClass<string>("hello");
+		Console.WriteLine(myyString.get());
+	}
+}
+```
+
+### Bounded Generics
+
+By default, generic variables are **Object** instances. **Bounded generics** allow making generic parameters more specific and hence less general. 
+For example, the **Sort** generic method below sorts any array of elements that implement ***IComparable\<T>*** interface.
+
+## IEnumerable\<T>
+
+**IEnumerable\<T>** exposes a collection of T elements, supporting a single iteration over them. It has not necessarily to be a container
+Derives from the polymorphic **IEnumerable**, that can be iterated with a **foreach**. Arrays derive from **Array** which implements **IEnumerable\<T>**
+
+```C#
+int[] intArray = new int[] {10, 99, 50};
+Array a = intArray;
+IEnumerable enumerable = intArray;
+IEnumerable<int> enumerablei = intArray;
+```
+
+**IEnumerable\<T>** and **IEnumerable** only declare one **GetEnumerator** message. It's a *factory method* responsible for building an iterator
+- **IEnumerable** is a bridge to hide the iterator implementation
+- The iterator is commonly implemented as a nested class within the collection
+![[Pasted image 20240215174316.png]]
+
+## Nullable Types
+
+Sometimes is required to represent that a built-in variable has no value (null). C# represents these types with the **?** postfix: **int?, char?, bool? ...**
+These types derive from the **Nullable\<T>** struct. The two most important members are
+- **HasValue:bool** (read-only) To know whether the value is **null** or not
+- **Value:T** (read and write) Returns the value if it is not **null;** , otherwise, **default(T)** is returned
+C# has also added the **??** operator
+
+## Collections
+
+Sometimes we need **abstractions that store collection** of objects. They're called **containers** and they're specific implementations of collections. C# provides:
+- Array objects (vectors)
+- Many classes in the .Net framework that provide different collection implementations
+
+.Net provides two kind of collections:
+- **Polymorphic**: Collect **Object** instances by means of polymorphism. **System.Collections** namespace
+- **Generic**: Collects objects by means of generics. **System.Collections.Generic** namespace
+
+When it's possible, it's better to use generic ones because:
+- They provide better runtime performance
+- Less runtime errors occur
+- More readable code with less casts
+
+## System.Collections.Generics
+
+Most important classes are:
+- **List\<T>**: Variable length Vector
+- **Dictionary\<Key, Value>**: Provides a mapping from a set of keys to a set of values, implemented as a hash table
+- **HashSet\<T>**: a collection that contains no duplicate elements
+- **LinkedList\<T>**: Doubly linked list
+- **Queue\<T>**: FIFO collection
+- **Stack\<T>**: LIFO collection
+- **SortedDictionary\<T>**: A dictionary sorted on the key
+[MSDN documentation](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic)

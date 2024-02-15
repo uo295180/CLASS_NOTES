@@ -82,4 +82,73 @@ Once executed the code to handle the interrupt, and **before** executing the **I
 2 - A context (or process) switch is executed:
 	2.1 - The values of PC and PSW are copied to the PCB of the interrupted process. The values of the rest of the CPU registers are copied as well
 	2.2 - The values of the new process are copied from its PCB table to the processor. PC and PWS are copied into the stack instead
-IRET execution will restore these values to the CPU[[README]]
+IRET execution will restore these values to the CPU
+
+## Context switch
+
+# TODO
+
+
+# Threads
+
+**A flow of execution within a process**:
+- Multiple threads in the same task
+- Each thread has:
+	- Program Counter
+	- Values of processor registers
+	- Stack
+- Threads share the
+	- Code (text), data and heap
+	- Open files, signals, etc
+
+**Applications**
+- Parallel Programming (task separation, modularity)
+- Information Servers
+**Advantages**
+- Ease communication between threads
+- Increase the speed of execution
+- Switching between threads of the same process has little cost
+- The cost of creation and destruction of threads is much lower than with process
+- It therefore improves performance
+**Disadvantages**
+- Sharing memory space
+- Greater programming difficulty
+
+## KLT and ULT
+
+![[Pasted image 20240215151052.png]]
+
+|  | Advantages | Disadvantages |
+| ---- | ---- | ---- |
+| ULT | • More policies available<br>• Management operations are more<br>efficient (creation, switching, blocking)<br>• Synchronization operations are available<br>without kernel intervention. | • If a thread is blocked, all<br>the rest are blocked too.<br>• There is no real parallelism |
+| KLT | • If a thread is blocked only that thread is<br>blocked.<br>• Real parallelism is possible | • Management operations<br>are less efficient<br>• Processor mode switch is<br>needed to change the<br>executing thread |
+**1 / 10 / 100 relationship**
+- ULT Thread creation: 1 time unit
+- KLT Thread creation: 10 time units
+- Process creation: 100 time units
+
+# Process and thread scheduling
+
+Scheduling is to share processor time between processes that can be executed
+- Scheduling Levels (classically) :
+	- **Short term**: assigns processor to ready processes
+	- **Middle term**: includes process suspension in secondary memory. Reduces the **degree of multiprogramming**
+	- **Long term**: decides which processes are admitted to the ready queue
+- **Scheduler**: module that decides which process to move from ready to running (Short-term scheduler)
+- **Dispatcher**: module that puts into execution the scheduled process
+
+## 7 states process model
+
+![[Pasted image 20240215151841.png]]
+
+## Scheduling goals
+
+**Metrics about scheduling algorithms performance**:
+
+- **For processes (or threads)**
+	- Turn-arround (or return) time (Tt)
+	- Waiting time (Tw)
+	- Response time (Tr)
+- **For the system**
+	- Processor use (C%)
+	- Completed works rate (or Throughput) (P)
