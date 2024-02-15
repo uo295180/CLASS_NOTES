@@ -392,7 +392,7 @@ Generally used to get input data from the user and to show messages. They derive
 Main features:
 - Title should be "Application name: dialog name"
 - We have to include mnemonics for every elements but the default button
-	```Java
+```Java
 	this.getRootPane().setDefaultButton(btnNext)
 ```
 and the cancel button.

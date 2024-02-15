@@ -43,7 +43,7 @@ They're values that provides some kind of information about the data. 3 types:
 ## Measures of central tendency
 
 - **Arithmetic mean** or **average**: Gives the 'most important' or central value in the sample. If the dataset is x1, x2, .... , xn
-$$\text{\=X} = \frac{x_{1}\text{ +  ... + }x_{n}}{n}$$
+$$\text{Mean(X)} = \frac{x_{1}\text{ +  ... + }x_{n}}{n}$$
 	It's always $\text{min} \leq \text{\=X} \leq \text{max}$ 
 	We can only compute it with quantitative variables
 	If we add a constant K to all data, the new mean is the prev one plus K (same for multiplying)
