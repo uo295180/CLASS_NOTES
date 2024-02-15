@@ -386,3 +386,80 @@ Three possible parameter passing mechanisms
 ## Named and Optional Arguments
 
 **Optional arguments** allows omitting arguments for some parameters
+
+# Prev Lab 3
+
+## Abstract classes and Methods
+
+When we need a class to provide a method but this method cannot be implemented, we declare it as **abstract**. In C\#, the **abstract** keyword is provided, and the method is not implemented. This abstract method should be overridden and it cannot be declared as **virtual**. The class containing this abstract methods should be declared as **abstract class**.
+
+## Interfaces
+
+Sometimes we need a type to be a subtype of two or more supertypes, but C\# does not provide multiple inheritance, so we aim to achieve multiple polymorphism. An interface can be defined as the class containing the set of messages provided to the user. In C\# this concept is offered as a type.
+Interfaces provide **multiple subtyping**. Therefore, a class or interface may derive from one or more interfaces
+
+```C#
+[public|internal|] interface name [: base-interfaces]{
+	message-declaratios
+}
+```
+
+By convention, interface identifiers starts by I. Also, interfaces cannot have class (**static**) members
+
+## IDisposable
+
+It's an interface in the System namespace with just one ***Dispose*** method. It's responsible of releasing the additional resources managed by the object. Every *.Net* class that manages additional resources should implement this interface.
+Commonly, a class that defines a destructor also implements IDisposable, where dispose is called by the destructor.
+
+```C#
+class File : IDisposable{
+
+	private string fileName;
+	private bool isOpen;
+		
+	public File(string fileName){
+		this.fileName = fileName;
+		this.isOpen = true;
+		Console.WriteLine("Opening the {0} file", fileName);
+	}
+
+	public void Dispose(){
+		if(this.isOpen){
+			this.isOpen = false;
+			Console.WriteLine("Closing the {0} file.", fileName);
+		}
+	}
+	~File(){ this.Dispose(); }
+}
+```
+
+As the programmer may forget invoking Dispose, C\# provides the **using** keyword (kind of a **try-catch with resources** in Java). Therefore, the call to Dispose is ensured.
+
+```C#
+using(File file = new File("input.txt")){
+	string line = file.ReadLine();
+	// Throws an exception (division by zero)
+	file.WriteLine(line + line.Length/"".Length);
+} // The file is closed (Dispose is invoked)
+```
+
+## Explicit interface implementation
+
+Considering the following scenario:
+```C#
+interface I1 { void m(); }
+interface I2 { void m(); }
+class C : I1, I2 {...}
+```
+
+And the programmer wants to provide different implementation to I1.m and I2.m. That's possible in C\# due to the **explicit** interface implementation syntax
+
+```C#
+class C : I1, I2 {
+	public void I1.m() {/* I1.m implementation*/}
+	public void I2.m() {/* I2.m implementation*/}
+}
+```
+
+[Mandatory activity](https://www.artima.com/articles/composition-versus-inheritance)
+
