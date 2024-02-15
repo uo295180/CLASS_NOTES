@@ -50,7 +50,7 @@ $
 		- %s for string
 	```c
 	printf("The %d char in %s is %c\n",3,s1,s1[3]);
-```
+	```
 - Enums
 	- If one variable needs some specific value, an enum can be used. Internally, an integer value is assigned to each element of the array. We can also use our own values
 ```c
@@ -69,7 +69,7 @@ enum INT_BITS {SYSCALL_BIT=2, CLOCKINT_BIT=9, EXCEPTION_BIT=6};
 	struct date d1 = {1,1,2019,"January"};
 	struct date d2;
 	d2=d1; d2.day=5;
-```
+	```
 - Type data alternative names
 	- With *typedef* we can define new types of data
 ```c

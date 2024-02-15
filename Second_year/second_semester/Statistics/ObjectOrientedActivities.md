@@ -142,6 +142,7 @@ class Enumeration{
 | Assignment | =,   +=,   -=,   *=,   /=,   %=,   &=,   \|=,   ^=,   <<=,   >>= |
 | Increment and Decrement | ++,   --       (prefix and postfix) |
 | Conditional ternary operator | ?: |
+
 The **+** operator with strings means concatenation. [More operators](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/)
 
 ### If, While and DoWhile
