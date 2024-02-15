@@ -773,4 +773,5 @@ Most important classes are:
 - **Queue\<T>**: FIFO collection
 - **Stack\<T>**: LIFO collection
 - **SortedDictionary\<T>**: A dictionary sorted on the key
+
 [MSDN documentation](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic)
