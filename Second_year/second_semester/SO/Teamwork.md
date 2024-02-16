@@ -1,3 +1,0 @@
-
-# IOS operating system overview
-

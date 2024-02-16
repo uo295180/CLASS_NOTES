@@ -13,13 +13,22 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
+                "file": "Second_year/second_semester/SO/Teamwork references.md",
                 "mode": "source",
                 "source": false
               }
             }
+          },
+          {
+            "id": "a645fe406122d38f",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -86,7 +95,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +111,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,9 +132,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Second_year/second_semester/TPP/ObjectOrientedActivities.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -147,13 +152,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "08adf08e8e040bde",
+  "active": "a645fe406122d38f",
   "lastOpenFiles": [
-    "Pasted image 20240215174316.png",
+    "Second_year/second_semester/SO/Teamwork references.md",
     "Second_year/second_semester/SO/2 - Process Management.md",
+    "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
+    "Pasted image 20240215174316.png",
     "Pasted image 20240215151841.png",
     "Pasted image 20240215151052.png",
-    "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
     "Second_year/second_semester/SO/1 - Introduction.md",
     "README.md"
   ]
