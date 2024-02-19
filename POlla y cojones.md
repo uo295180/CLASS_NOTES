@@ -1,2 +1,0 @@
-
-Fonso putero
