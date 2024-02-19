@@ -23,12 +23,28 @@
             "id": "a645fe406122d38f",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Second_year/second_semester/Algorithmics/README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "578b8d01cb1482d9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "POlla y cojones.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -78,8 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "acaf32e733e70b4a",
@@ -95,6 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "POlla y cojones.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,6 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "POlla y cojones.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,7 +149,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "POlla y cojones.md"
+              }
             }
           }
         ]
@@ -152,8 +171,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a645fe406122d38f",
+  "active": "578b8d01cb1482d9",
   "lastOpenFiles": [
+    "Second_year/second_semester/Algorithmics/README.md",
+    "POlla y cojones.md",
     "Second_year/second_semester/SO/Teamwork references.md",
     "Second_year/second_semester/SO/2 - Process Management.md",
     "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
