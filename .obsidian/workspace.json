@@ -25,19 +25,31 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Second_year/second_semester/Algorithmics/README.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "578b8d01cb1482d9",
+            "id": "dfb56e684bf4b296",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "POlla y cojones.md",
+                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ede4592427af9336",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Second_year/second_semester/Databases/README.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +106,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "acaf32e733e70b4a",
@@ -110,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "POlla y cojones.md",
+                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +140,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "POlla y cojones.md",
+                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +163,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "POlla y cojones.md"
+                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md"
               }
             }
           }
@@ -171,8 +184,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "578b8d01cb1482d9",
+  "active": "dfb56e684bf4b296",
   "lastOpenFiles": [
+    "Second_year/second_semester/Databases/README.md",
+    "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
+    "Untitled.md",
+    "().md",
+    "TODO.md",
+    "Second_year/second_semester/Databases",
+    "README.md",
     "Second_year/second_semester/Algorithmics/README.md",
     "POlla y cojones.md",
     "Second_year/second_semester/SO/Teamwork references.md",
@@ -181,7 +201,6 @@
     "Pasted image 20240215174316.png",
     "Pasted image 20240215151841.png",
     "Pasted image 20240215151052.png",
-    "Second_year/second_semester/SO/1 - Introduction.md",
-    "README.md"
+    "Second_year/second_semester/SO/1 - Introduction.md"
   ]
 }
