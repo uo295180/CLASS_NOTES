@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Second_year/second_semester/SO/2 - Process Management.md",
                 "mode": "source",
                 "source": false
               }
@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
+                "file": "Second_year/second_semester/SO/3 - Concurrency.md",
                 "mode": "source",
                 "source": false
               }
@@ -123,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
+                "file": "Second_year/second_semester/SO/3 - Concurrency.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -140,7 +140,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
+                "file": "Second_year/second_semester/SO/3 - Concurrency.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -163,7 +163,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Second_year/second_semester/Databases/Introduction to the Relational Model.md"
+                "file": "Second_year/second_semester/SO/3 - Concurrency.md"
               }
             }
           }
@@ -186,17 +186,24 @@
   },
   "active": "dfb56e684bf4b296",
   "lastOpenFiles": [
-    "Second_year/second_semester/Databases/README.md",
+    "Pasted image 20240222160929.png",
+    "Second_year/second_semester/SO/2 - Process Management.md",
+    "README.md",
+    "Second_year/second_semester/SO/3 - Concurrency.md",
+    "Pasted image 20240222154222.png",
+    "Pasted image 20240222153201.png",
+    "Pasted image 20240222152222.png",
+    "Pasted image 20240222151858.png",
+    "Pasted image 20240222151312.png",
+    "Second_year/second_semester/SO/Teamwork references.md",
     "Second_year/second_semester/Databases/Introduction to the Relational Model.md",
+    "Second_year/second_semester/Databases/README.md",
     "Untitled.md",
     "().md",
     "TODO.md",
     "Second_year/second_semester/Databases",
-    "README.md",
     "Second_year/second_semester/Algorithmics/README.md",
     "POlla y cojones.md",
-    "Second_year/second_semester/SO/Teamwork references.md",
-    "Second_year/second_semester/SO/2 - Process Management.md",
     "Second_year/second_semester/TPP/ObjectOrientedActivities.md",
     "Pasted image 20240215174316.png",
     "Pasted image 20240215151841.png",
