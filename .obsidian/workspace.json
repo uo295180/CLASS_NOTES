@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Second_year/second_semester/Statistics/Probability models.md",
+                "file": "Second_year/second_semester/Statistics/Random variables.md",
                 "mode": "source",
                 "source": false
               }
@@ -135,7 +135,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Second_year/second_semester/Statistics/Probability models.md",
+                "file": "Second_year/second_semester/Statistics/Random variables.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -152,7 +152,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Second_year/second_semester/Statistics/Probability models.md",
+                "file": "Second_year/second_semester/Statistics/Random variables.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -175,7 +175,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Second_year/second_semester/Statistics/Probability models.md"
+                "file": "Second_year/second_semester/Statistics/Random variables.md"
               }
             }
           }
@@ -198,8 +198,9 @@
   },
   "active": "d601568ad68be750",
   "lastOpenFiles": [
-    "n.md",
     "Second_year/second_semester/Statistics/Probability models.md",
+    "Second_year/second_semester/Statistics/Random variables.md",
+    "n.md",
     "Pasted image 20240222160929.png",
     "Second_year/second_semester/SO/2 - Process Management.md",
     "README.md",
