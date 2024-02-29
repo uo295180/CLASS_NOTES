@@ -190,6 +190,68 @@ Types of Communication:
 - **Asynchronous** (non-blocking send and receive): Nobody waits
 
 **Communication modes**:
-- **Direct commnucation**
+- **Direct communication**: Message sending to the process
+- **Indirect communication**: Messages sending to an intermediate structure form which the process takes it up
+	- Messages queues or mailboxes
+	- Ports
 
+>[!Message queues]
+>The source and destination identifies an intermediate entity: a mailbox. There may be multiple senders and multiple receivers
+
+>[!Ports]
+>Specific case of a mailbox, where there's only one receiver, there may be multiple senders. The port typically belongs to the receiving process
+
+![[Pasted image 20240229175737.png]]
+
+## Shared memory
+
+It's used to communicate processes within the same machine. The OS allows multiple processes to access the same memory via specific system calls for shared memory creation.
+Processes can use this memory area to leave date that must be accessible by all. All threads in the same process share memory without OS intervention
 # Deadlock
+
+>[!Definition]
+>Permanent blockade of several processes competing for resources or that need ro synchronize with each other
+
+Deadlock is an anomaly that occurs when a process is waiting for an event that **cannot** happen.
+![[Pasted image 20240229203117.png]]
+
+- **Exclusive** use of resources shared by multiple processes. There're usually sets of processes or threads involved
+- Not to be confused with *starvation* or *indefinite postponement*, that occurs due to poor allocation **policy**
+
+## Examples
+
+**With just one process:**
+This process is waiting for an event that will not happen (*sleep until 12:00 January 1, 2000*)
+
+**With two processes:**
+Process 1:
+```pseudocode
+Request 80 KB
+...
+Request 60 KB
+...
+Release 140 KB
+```
+
+Process 2:
+```pseudocode
+Request 70 KB
+...
+Request 80 KB
+...
+Release 150 KB
+```
+
+Both of them will be blocked if the first request of each process has been attended
+
+## Treatment
+
+4 strategies:
+- Prevention, by negating one of the four conditions
+- Dynamic avoidance by careful resource allocation
+- Detection and recovery
+- Ignore the problem
+
+>[!Important]
+>Read chapter 6 of the textbook for more info
+

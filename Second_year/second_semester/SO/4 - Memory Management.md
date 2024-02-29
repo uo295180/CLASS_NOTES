@@ -99,14 +99,38 @@ The most used schema is the **Virtual memory** with paging
 ### Fixed partitions
 
 Memory is divided into a **fixed number** or **fixed-size** partitions. The admin can configure the number of partitions and the size of each one, but it requires rebooting. Each process is assigned a free partition that fits, according to the *allocation policy* used by the OS.
-The data structures 
+The data structures needed for control are simple. Generates no **external fragmentation**, but it does generates **internal fragmentation** (the wasted space in one partition cannot be used by another process)
+
+>[!Advantages]
+>- Simplicity of implementation
+>- Memory translation simple and efficient
+>- Processes have separate logical spaces
+>- Ensures protection processes
+
+>[!Disadvantages]
+>- Sharing memory is impossible
+>- Does not support region management
+>- Limits the degree of multiprogramming
+>- Limits the size of the memory map of the processes
 
 
+### Variable partitions
 
+When system starts, available memory appears as one unique continuous space. When a process is created, memory is taken from the free space. The assigned partition depends on the **allocation policy** used: *Best fit*, *Worst fit*, *First fit*, *Buddy*
+The data structures needed for control are simple but more complex than the fixed ones. Generates **external fragmentation**, which must be resolved by the system.
+![[Pasted image 20240229173617.png]]
 
+>[!Advantages]
+>- Relative simple implementation. (More complex than the fixed one)
+>- Memory translation simple and efficient
+>- Processes have separate logical spaces
+>- Ensures protection of the processes
 
-
-
+>[!Disadvantages]
+>- Sharing memory impossible
+>- Does not support region management
+>- Limits the degree of multiprogramming (Less than fixed partitions)
+>- Limits the size of the memory map of the processes (less than fixed partitions)
 
 
 >[!Important]
@@ -114,3 +138,6 @@ The data structures
 >
 >Physical memory with non-contiguous allocation is not seen in this course (We jump directly to Virtual memory)
 >
+
+
+# Virtual memory
