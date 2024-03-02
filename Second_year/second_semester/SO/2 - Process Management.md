@@ -30,7 +30,9 @@ It's something that's alive. It's defined by:
 - The value of their data in that instant
 - The value of the execution stack
 - The value of all the registers of the processor
+
 All this information constitutes what is known as the **state of the process**.
+
 A process is:
 - **Text section** (code)
 - **Data section** (global variables and dynamic memory)
@@ -86,8 +88,19 @@ IRET execution will restore these values to the CPU
 
 ## Context switch
 
-# TODO
+It makes a process leave the CPU and assign it to another process. It implies:
+- Save the state of the processor in the PCB of leaving process
+- Restore the state of the processor form the PCB of the process to be executed
 
+![[Pasted image 20240229204710.png]]
+
+Some interrupts will cause a process switch:
+- The current process cannot continue $\rightarrow$ It ends or it goes to the blocked state
+- The current process can continue, but the system decides that it has been execution for too much time
+
+## Process creation
+
+![[Pasted image 20240229205059.png]]
 
 # Threads
 
@@ -152,3 +165,158 @@ Scheduling is to share processor time between processes that can be executed
 - **For the system**
 	- Processor use (C%)
 	- Completed works rate (or Throughput) (P)
+
+## Scheduling policies
+
+- **Non-expulsive**
+	- FCFS / FIFO (First Come, First Served) / (First In, First Out)
+	- SJF (Shortest Time first)
+- **Expulsive / preemptive** 
+	- SRTF (Shortest Remaining Time First)
+	- Round Robin (rotation shift)
+- **Priorities**
+	- Static
+	- Dynamic
+
+>[!Actual]
+>Expulsive policy mix:
+>Multilevel Queues with dynamic priorities + round robin
+
+### FCFS scheduling policy or non-expulsive FIFO
+
+*Ready* for execution processes are stored in a FIFO queue, so when a process changes its state to *Ready*, it goes to the end. A process leaves the CPU when:
+- The process makes a *system call* and it gets *Blocked*
+- The process ends
+- The process *voluntarily* leaves the CPU
+When the CPU is free the scheduler picks the first element in the queue
+### SJF scheduling policy (Shortest Job First)
+
+We choose the process with **shorter total duration**. Requires knowing the runtime before running the job. May cause long process starvation. It improves the average response time but increase the variance. Deprecated Policy. Designed for batch processing system before multiprogramming.
+### Cyclic scheduling policy or Round Robin
+
+The **clock device** produces an interrupt periodically. The interval between clock ticks can be modified. Different form CPU clock.
+![[Pasted image 20240302125611.png]]
+
+It **provides a fair sharing of processor time**. The system assigns a ***quantum***, or time slice, to the running process.
+*Ready* for the execution processes are organized into a FIFO queue (as in FCFS). A process leaves the CPU when:
+- The process makes a *system call* and as a result it changes to *Blocked*
+- The process *ends*
+- The process *exhausts its quantum*
+When the CPU is free, the first process in the ready queue is chosen
+
+![[Pasted image 20240302130116.png]]
+
+### Priority scheduling policy
+
+Each process is assigned a priority, that could be assigned by the user or by the system. The *ready queue* is sorted by priority, that could be static or dynamic.
+
+**Static priority:**
+- **Static: fixed during the lifetime of the process**
+- Easy to implement
+- Introduces little overhead on the system
+- It doesn't adapt to changes in the environment
+- May cause *starvation*.
+
+**Dynamic priority**: priority varies during the process lifetime
+- More difficult to implement
+- Introduces more overhead on the system
+- Avoid ***starvation***
+
+>[!Examples]
+>1.
+>Priority aging:
+>An initial priority is assigned and increases as time passes without running. When running, it returns to the initial priority
+>
+>2.
+>It increases the priority when the process performs I/O operations and it decreases it when the quantum is exhausted
+
+This policy is combined with others.
+
+### Scheduling policy for real-time systems
+
+Processes have a deadline that must be known by the scheduler. They must end executing before this deadline. There're two types of real time systems:
+- Soft real-time systems. Only guarantee critical processes will have preference over non-critical processes
+- Hard real-time. A process must be executed before its deadline
+The system must minimize the *latency*. There're  specific policies: priority based, rate-monotonic (RMS), earliest-deadline-first...
+
+### POSIX scheduling policy
+
+It applies to Processes and Threads. Priority level between 0 and 31. **It chooses the highest priority thread (lower numeric value)**. 
+Available policies (via *sched_setscheduler* system call):
+- FIFO (SCHED FIFO)
+- Round Robin (SCHED RR)
+- Other (SCHED OTHER)
+All of them exists in the system simultaneously: **Each process chooses the policy,** so we have all the policies at the same time.
+
+### Windows NT scheduling policy
+
+It's a cyclic scheduling with priorities and expulsion. It has 32 scheduling levels (0 to 31) organized as:
+- 16 levels with **real-time priorities (16-31)**. Fixed priority, FIFO
+- 15 levels with **varying priorities (1-15)**. They vary according to the thread behavior. Round Robin (Decremented if the thread runs out of time and incremented by performing an I/O operation)
+- **0 level for system**
+- Process and Threads have base priority
+
+## Multiprocessor scheduling
+
+Running the OS on multiprocessors:
+
+- **Asymmetric multiprocessing**
+	- A processor dedicated to running the OS
+	- It can be slow but the OS is simpler
+	- OS operations are not concurrent
+
+- **Symmetric Multiprocessing**
+	- The OS runs on all processors are needed
+	- Concurrency issues inside the OS services
+	- OS code is more complex
+	- More efficient execution
+
+**Scheduling criteria:**
+**Processor affinity:** Tendency to assign the same processor to a process for maximizing the cache information. It can be:
+- Soft: the scheduling is going to try to keep the process in the same processor
+- Hard/Strict: possibility to indicate the processor or group where some processes can be executed (for critical processes)
+**Load balancing:** keep the load of all processor similar
+
+**Two possibilities to implement the read-to-run queue**
+- **Unique queue for all processors**
+	- We have load balancing by default
+	- Single queue needs *protected access*, implies *bottleneck*
+
+- **One queue per processor**
+	- The previous bottleneck disappears
+	- Load Rebalancing is not automatic:
+		- Push migration: the OS checks periodically the load of every processor, moving processes among processors to balance them
+		- Pull migration: when a processor is idle, it takes processes from the queue of other processor
+
+**Thread scheduling policies**:
+1. Not taken into account the relationships between same process' threads
+2. It tables into account the relationships between threads
+	- Shared time
+		- Applications are multiplexed in time 
+		- Time is assigned to each application (set of threads) in a processor. All threads are running on the same processor
+		- It takes advantage of the processor affinity
+	- Shared space
+		- Applications are multiplexed in space and time
+		- Application's threads are distributed among groups of processors
+		- Applications are also multiplexed in the time
+
+Both types can use shared or local queues
+
+
+
+
+
+# TODO 
+
+>[!TODO]
+>- [x] Scheduling policies
+>- [x] FCFS scheduling policy or non-expulsive FIFO
+>- [x] SJF scheluding policy (Shortest Job First)
+>- [x] Cyclic scheduling policy or Round Robin
+>- [x] Priority scheduling policy
+>- [x] Scheduling policy for real-time systems
+>- [x] POSIX scheduling policy
+>- [x] Windows NT scheduling policy
+>- [x] Multiprocessor scheduling
+
+
