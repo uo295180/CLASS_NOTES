@@ -141,3 +141,27 @@ The data structures needed for control are simple but more complex than the fixe
 
 
 # Virtual memory
+
+It expands main memory using disk as temporary storage. We don't need to have the whole process memory space loaded in main memory to be able to execute it. Process image is divided into fragments, loaded and unloaded as needed. **Non-contiguous allocation** is used.
+
+>[!The locality principle]
+>*When referring to a memory address is very likely to refer to the **same** address or **others nearby** in a short time*
+>
+>Memory references tend to group in relatively small areas of process memory space during some time interval
+
+Advantages:
+
+1. The size of a process size may be greater than the physical memory space. The logical address space could reach 2 raised to the number of bits of the address bus, regardless of the amount of available memory in the system.
+2. It increases the degree of multiprogramming
+	- Allocates a small portion of memory for each process
+	- **More processes fit** into main memory
+3. Transparent to the programmer. **It's managed by the OS**
+
+## Paging
+
+Division of the process address space into fragments called **pages**.
+Division of the main memory into fragments called **frames**
+Frames and pages have the **same size**
+Process pages can be loaded into any frame
+Process logical address is mapped into a pair (page, offset)
+Memory physical address is mapped into a pair (frame, offset)
