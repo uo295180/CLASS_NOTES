@@ -80,10 +80,10 @@ The processor instruction cycle:
 ![[Pasted image 20240208154823.png]]
 
 Once executed the code to handle the interrupt, and **before** executing the **IRET** instruction:
-1 - A new process is chosen from the *Ready to Run* queue
-2 - A context (or process) switch is executed:
-	2.1 - The values of PC and PSW are copied to the PCB of the interrupted process. The values of the rest of the CPU registers are copied as well
-	2.2 - The values of the new process are copied from its PCB table to the processor. PC and PWS are copied into the stack instead
+1. A new process is chosen from the *Ready to Run* queue
+2. A context (or process) switch is executed:
+	1. The values of PC and PSW are copied to the PCB of the interrupted process. The values of the rest of the CPU registers are copied as well
+	2. The values of the new process are copied from its PCB table to the processor. PC and PWS are copied into the stack instead
 IRET execution will restore these values to the CPU
 
 ## Context switch
@@ -290,7 +290,7 @@ Running the OS on multiprocessors:
 
 **Thread scheduling policies**:
 1. Not taken into account the relationships between same process' threads
-2. It tables into account the relationships between threads
+2. It takes into account the relationships between threads
 	- Shared time
 		- Applications are multiplexed in time 
 		- Time is assigned to each application (set of threads) in a processor. All threads are running on the same processor

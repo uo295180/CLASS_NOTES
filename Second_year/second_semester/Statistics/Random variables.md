@@ -65,3 +65,46 @@ P(2 $\leq$ Z $\leq$ 4) $\rightarrow$ P(Z = 2) + P(Z = 3) + P(Z = 4) = $e^{-1.5}*
 c) P more than 4 seconds pass between two messages. This is the same as say that in 4 seconds there was no messages. 
 It follows ~P(0.3\*4) 
 P(P(1.2) = 0) = $e^{-1.2}*\frac{1.2^{0}}{0!}$ = 0.301
+
+## 12
+
+X = diameter ~ N(20, 0.01)
+Specifications 20.015 +- 0.025 = \[19.99, 20.04]
+
+a) P(19.99 $\leq$ X $\leq$ 20.04) = P(19.99 $\leq$ N(20, 0.01) $\leq$ 20.04) = P($\frac{19.99 - 20}{0.01} \leq \frac{N(20, 0.01) - 20}{0.01} \leq \frac{20.04 -20}{0.01}$) = P(-1 $\leq$ N(0, 1) $\leq$ 4) = P(N(0, 1) $\leq$ 4) - P(N(0, 1) $\leq$ -1)
+
+>[!Important]
+>$$\frac{N(\mu, \delta) - \mu}{\delta} ~ N(0, 1)$$
+
+
+P(N(0, 1) $\leq$ 4) = 1
+P(N(0, 1) $\leq$ -1) = P(N(0,1) $\geq$ 1) = 1 - P(N(0, 1) $\geq$ -1) = 1 - 0.8413 = 0.1587
+
+ P(N(0, 1) $\leq$ 4) - P(N(0, 1) $\leq$ -1) = 1 - 0.1587 = 0.8413
+
+b) Now X ~ N(20.015, 0.015)
+
+ P(19.99 $\leq$ X $\leq$ 20.04) = P($\frac{19.99 - 20.015}{0.015} \leq \frac{N(20.015, 0.015) - 20.015}{0.015} \leq \frac{20.04 -20.015}{0.015}$) = P(-2.5 $\leq$ N(0, 1) $\leq$ 2.5) = P(N(0, 1) $\leq$ 2.5) - P(N(0, 1) $\leq$ -2.5)
+
+P(N(0, 1) $\leq$ 2.5) = 0.9938
+P(N(0, 1) $\leq$ -2.5) = P(N(0,1) $\geq$ 2.5) = 1 - P(N(0, 1) $\geq$ -2.5) = 1 - 0.9938 = 0.0062
+
+ P(N(0, 1) $\leq$ 2.5) - P(N(0, 1) $\leq$ -2.5) = 0.9938 - 0.0062 = 0.9876
+
+## 13
+
+X = amount of liquid ~ N(500, 50)
+
+a) P(X > 550) = P(N(500, 50) > 550) = P(N(0, 1) > $\frac{550 - 500}{50}$) = P(N(0, 1) > 1) = 1 - P(N(0, 1) $\leq$ 1) = 1-0.8413 = 0.1587 
+
+b) We're looking for K where The probability of a bottle having > K ml is 5%
+
+Then, P(X > K) = 0.05 = P(N(500, 50) < K) = P(N(0, 1) > $\frac{K - 500}{50}$)
+
+$\frac{K - 500}{50} = 1.64 \rightarrow K = 1.64 * 50 + 500 = 582$ 
+
+c) Y = liquid ~ N($\mu$, 50)
+
+P(Y - $\mu$ > 75) = P (Y > 75 + $\mu$) = P(N($\mu$, 50) > 75 + $\mu$) = P(N(0, 1) > $\frac{75 + \mu - \mu}{50}$)  =P(N(0, 1) > 1.5) = 1 - P(N(0, 1) $\leq$ 1.5)  = 1 - 0.9332 = 0.0668
+
+## 23 
