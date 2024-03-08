@@ -165,3 +165,5 @@ Frames and pages have the **same size**
 Process pages can be loaded into any frame
 Process logical address is mapped into a pair (page, offset)
 Memory physical address is mapped into a pair (frame, offset)
+
+To translate a logical address we only need to substitute the number of the page with the number of the frame where that page is loaded. If that page is not loa

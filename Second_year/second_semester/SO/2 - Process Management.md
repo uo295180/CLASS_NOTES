@@ -301,22 +301,3 @@ Running the OS on multiprocessors:
 		- Applications are also multiplexed in the time
 
 Both types can use shared or local queues
-
-
-
-
-
-# TODO 
-
->[!TODO]
->- [x] Scheduling policies
->- [x] FCFS scheduling policy or non-expulsive FIFO
->- [x] SJF scheluding policy (Shortest Job First)
->- [x] Cyclic scheduling policy or Round Robin
->- [x] Priority scheduling policy
->- [x] Scheduling policy for real-time systems
->- [x] POSIX scheduling policy
->- [x] Windows NT scheduling policy
->- [x] Multiprocessor scheduling
-
-

@@ -17,6 +17,12 @@ X follows a Poisson distribution with parameter $\lambda$. We denote it  X~P($\l
 
 E(X) = $\lambda$ = Var(X)
 
+# Continuous random variables
+
+## Uniform distribution
+
+
+
 
 # Exercises 
 
