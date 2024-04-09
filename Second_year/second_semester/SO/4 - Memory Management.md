@@ -139,6 +139,24 @@ The data structures needed for control are simple but more complex than the fixe
 >Physical memory with non-contiguous allocation is not seen in this course (We jump directly to Virtual memory)
 >
 
+## Non-contiguous allocation
+
+## Segmentation + paging
+
+Each process uses a **segment table** and several **page tables**.
+Address translation:
+![[Pasted image 20240314151329.png]]
+
+>[!Advantages]
+>- Increase the degree of multiprogramming
+>- Increase the size of the memory map of the process
+>- Processes have separate logical spaces
+>- Ensures protection of the processes
+>- Enables memory sharing
+>- Contemplate regions management
+
+>[!Disadvantages]
+>Memory translation is not simple and efficient $\rightarrow$ + complicated than paging but - than segmentation
 
 # Virtual memory
 
@@ -167,3 +185,59 @@ Process logical address is mapped into a pair (page, offset)
 Memory physical address is mapped into a pair (frame, offset)
 
 To translate a logical address we only need to substitute the number of the page with the number of the frame where that page is loaded. If that page is not loa
+
+
+## Segmentation
+
+Applies the concept of region to the memory management. A process consists of a set of segments, each with its own address space. Each segment stores a region of the process and is stored in adjacent positions. Uses a segment table per process, to store the size, load bit, modification bit... . It needs a partition table to manage free/busy partitions in the system
+
+>[!Advantages]
+>- Increase the degree of multiprogramming
+>- Process have separate logical spaces
+>- Ensures protection of the processes
+>- **Enables memory sharing**
+>- **Contemplate regions management**
+
+>[!Disadvantages]
+>- Memory translation is not simple and efficient
+>- Difficult storage management
+
+
+## Segmentation + paging
+
+
+Puts together the advantages of the Segmentation for logical space management and Paging for physical space management. A process consists of a set of segments, each with its own address space. Each segment is divided into a set of pages of equal size. The memory is divided into page frames of equal size. Each process will have a table of segments and each segment a page table
+
+
+# Virtual memory management
+
+**2 types of design decisions**
+
+- Hardware Dependent
+	- Paging, Segmentation, Segmentation + Paging
+
+- Software Dependent
+	- What to do with **page faults**
+	- Policies for storage management
+		- Reading Policies
+		- Replacement policies
+		- Allocation policies
+
+![[Pasted image 20240314152640.png]]
+
+## Reading policies
+
+**Determines when to load a page in memory**
+
+**On demand paging** $\rightarrow$ Brings to memory when there's a page fault
+**Pre-paging** $\rightarrow$ Bring to memory several contiguous pages. Increased load efficiency from secondary memory
+
+## Replacement policies
+
+Determines which page in main memory **to page out** when we need to load another and there's no room for her. The replacement scope can be:
+**Global** $\rightarrow$ Replaces one page of any process in memory
+**Local** $\rightarrow$  Replaces one page belonging to the process that requires the new one
+
+## Allocation policies
+
+Determines **how many frames are assigned** to a process. 

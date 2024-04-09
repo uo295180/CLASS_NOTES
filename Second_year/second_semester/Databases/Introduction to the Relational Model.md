@@ -6,4 +6,11 @@ But, this primary key will not necessary be in all the tables. Therefore, more t
 
 Tables can also be used to establish relationships (between other tables or between the elements of the same table). A relationship between *n* values is represented mathematically by an *n-tuple* of values (or, a tuple of *n* that corresponds to a row in the table). The term **relation instance** is used to refer to a specific instance of a relation. Therefore, a table of **u** with 10 rows contains 10 **u** instances.
 
-For each attribute of a relation, there's a set of permitted values called the **domain** of that attribute. A domain is **atomic** if elements of the domain are considered to be indivisible units.
+For each attribute of a relation, there's a set of permitted values called the **domain** of that attribute. A domain is **atomic** if elements of the domain are considered to be indivisible units. The **null value** is a special value that determines that the value is unknown or does not exist. 
+
+# Database schema
+
+We must differentiate between the **database schema**, that's the **logical design** of the database and the **database instance**, which is a snapshot of the database at a given instant of time. The concept of a **relation schema** corresponds to the programming-language notion of type definition. A relation schema consists of a list of attributes and their corresponding domains.
+
+# Keys
+

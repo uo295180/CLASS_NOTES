@@ -8,7 +8,7 @@ We say that two variables X, Y are *independent* if knowing the value of one of 
 # Binomial distribution
 
 We make independent repetitions of an experiment, and count in how many repetitions an event happens.
-If we make **n** repetitions, and in each repetition the probability of the event **p**, we say that X follows a binomial(n, p), and denote it **$$X~B(n,p)$$**
+If we make **n** repetitions, and in each repetition the probability of the event **p**, we say that X follows a binomial(n, p), and denote it **$$X ~ B(n,p)$$**
 The probability mass function is **P( B(n,p) = k )**
 
 >[!Example]

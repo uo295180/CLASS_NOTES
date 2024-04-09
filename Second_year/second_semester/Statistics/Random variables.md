@@ -1,6 +1,14 @@
 
 # Notable discrete distributions
 
+**Reproductivity:** We say that a parametric family (Poisson, normal) is *reproductive* if the sum of two independent distributions from that family gives another distribution of the same family.
+
+- The Poisson is reproductive if X ~ P($\lambda_{1}$), Y ~ P($\lambda_{2}$) are independent, then X + Y ~ P($\lambda_{1} + \lambda_{2}$)
+- The binomial is reproductive if we fix the second parameter: if  X ~ B(n1, p), Y ~ B(n2, p) are independent, X+Y ~ B(n1+n2, p)
+- The uniform is NOT reproductive
+- The normal is reproductive: if X ~ N($\mu_{1}, \delta_{1}$), Y ~ N($\mu_{2}, \delta_{2}$) are independent, then  X+Y ~ N($\mu_{1} + \mu_{2}$, $\sqrt{\delta_{1}^{2} + \delta_{2}^{2}}$)
+- The exponential is NOT reproductive: the sum of exponential distributions with the same parameter produces a *gamma* distribution: if X ~ exp($\lambda$), Y ~ exp($\lambda$) then X + Y ~ $\gamma$ (2, $\lambda$) 
+
 ## Binomial distribution
 
 
@@ -19,11 +27,37 @@ E(X) = $\lambda$ = Var(X)
 
 # Continuous random variables
 
-## Uniform distribution
+>[!TODO]
+>- [ ] Uniform distribution
+>- [ ] Normal distribution
+>- [ ] Exponential distribution
+>- [x] Weibull distribution
 
 
+## Weibull distribution
 
+It generalizes the exponential to deal with situations where we do not have lack of memory (for instance if something deteriorates or improves with time). We say that X follows a Weibull distribution with parameters K (shape) and $\lambda$ (scale) and denote it X ~ W (K, $\lambda$) if its density is 
+$$f(x) = (\frac{K}{\lambda})*(\frac{x}{\lambda})^{k-1}*e^{-(\frac{x}{\lambda})^{k}} \text{ if } x>0$$
+0 otherwise
 
+The distribution function is 
+$$F(t) = P(X \leq t) = 1 - e^{-(\frac{t}{\lambda})^{k}} \text{ if } t > 0$$
+
+0 otherwise
+
+The **hazard rate** of an interval ($t_{1}, t_{2}$) is  the probability that it fails before $t_{2}$, if it has lasted until $t_{1}$, divided by the length of the interval:
+$$h(t_{1}, t_{2}) = \frac{P(X < t_{2} | X > t_{1})}{t_{2} - t_{1}} = \frac{P(t_{1} < X < t_{2})}{P(X > t_{1})*(t_{2} - t_{1})} = \frac{F(t_{2} - F(t_{1}))}{(1 - F(t_{1}))*(t_{2} - t_{1})}$$
+The hazard rate at $t_1$ is the limit $t_2 \rightarrow t_1 h(t_1, t_2)$
+$$\lim_{t_{2} \rightarrow t_{1}} \frac{F(t_{2} - F(t_{1}))}{(1 - F(t_{1}))*(t_{2} - t_{1})} = \frac{F'(t_1)}{1- F(t_1)} = \frac{f(t_1)}{1 - F(t_!)}$$
+
+It's interpreted as the likelihood of the component braking down around time $t_1$
+
+With the Weibull distribution, we obtain
+$$h(t) = \frac{f(t)}{1 - F(t)} = \frac{K}{\lambda} * (\frac{t}{\lambda})^{k -1}$$
+
+- If  K > 1, then h(t) increases as t increases: the component deteriorates with time
+- If K < 1, then h(t) decreases as t increases: the component improves with time
+- If K = 1, it is h(t) = $\frac{1}{\lambda}$ : the component neither improves nor deteriorates. It is the exponential distribution: W(1, $\lambda$) = exp($\frac{1}{\lambda}$)
 # Exercises 
 
 ## 5
@@ -113,4 +147,12 @@ c) Y = liquid ~ N($\mu$, 50)
 
 P(Y - $\mu$ > 75) = P (Y > 75 + $\mu$) = P(N($\mu$, 50) > 75 + $\mu$) = P(N(0, 1) > $\frac{75 + \mu - \mu}{50}$)  =P(N(0, 1) > 1.5) = 1 - P(N(0, 1) $\leq$ 1.5)  = 1 - 0.9332 = 0.0668
 
-## 23 
+## 19
+
+X = lifetime ~W(2,3)
+
+a) P(X < 6) = F(6) = $1- e^{-(2)^2}$ = $1 - e^{-4}$ = 0.9817
+
+b) P(X > 3) = 1 - P(X $\leq$ 3) = 1 - F(3) = 1 - (1 - $e^{-(1)^2}$) = $e^{-1}$ = 0.3679
+
+c) We look for K such that 0.75 = P(X $\leq$ t) = F(t) = 1 - $e^{-(\frac{t}{3})^{2}}$ = 0.75 $\rightarrow$ $e^{-(\frac{t}{3})^{2}} = 0.25$ $\rightarrow$ $(\frac{t}{3})^{2} = log(0.25)$ $\rightarrow$ $t = 3*\sqrt{-log(0.25)}$ $\rightarrow$ t = 3.53
