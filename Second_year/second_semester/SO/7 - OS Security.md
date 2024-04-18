@@ -125,3 +125,114 @@ Some issues depends on the user education and/or the administrator; others can b
 
 ## Authentication using physical tokens
 
+Users are identified by something they own like a magnetic card. It's easily usable:
+- Requires special hardware, but it's not usually very expensive
+- The False Rejection Rate (FRR) is null
+- The False Acceptance Rate (FAR) is also null
+
+Almost all OS provide mechanisms to incorporate them as an access control element
+
+## Biometric authentication
+
+Users identify themselves with some feature of their own like fingerprints, iris... . It's not used very often:
+- Requires special hardware, relatively expensive
+- Fase Rejection Rate (FRR) may become unacceptable
+- False Acceptance Rate (FAR) can be dangerously high
+- Manufacturers often adjust the acceptance threshold by preferring to reject legal users than accept unauthorized users
+- Almost all OS provide mechanisms to incorporate them as an access control element
+
+## Other mechanisms
+
+- Using a private - public key pair or user certificates:
+	- In this case it can only be accessed from machines that have installed the private part of the user's key
+- Using "one time passwords"
+- Using two-factor authentication
+
+# Resource protection
+
+## The access matrix
+
+In general, an access matrix should be managed as the primary protection model. Rows: **Clients**; Columns: **Resources**
+
+M\[ i , j ] - Client permissions i on resource j
+
+There're two implementations of this matrix:
+- **Access control lists (by columns)** $\rightarrow$ Each resource saves the list of clients with their permissions (vector column of the array)
+- **Capabilities (per row)** $\rightarrow$ Each client saves the list of capabilities (resource+permissions) that it has available
+
+## Access control lists
+
+When a customer makes a request about a resource the OS (protection mechanism) checks whether the client is in the resource ACL
+
+>[!ACL inconveniences]
+>- Lack of scalability:
+>		Many customers $\rightarrow$ Very large ACL
+>		Many resources $\rightarrow$ Many ACL
+>	
+>- Solution:
+>		Group of clients $\rightarrow$ Decreases the number of ACL entries
+>		Group of clients $\rightarrow$ Decreases the number of ACL
+
+## Protection domains
+
+Each OS determines who is granted or not to execute some type of access to resources. Unix distinguishes three domains: owner, group and other users.
+In Unix, with the ACL package installed, you can include n domains: independent users in any number, groups in any number and "other"
+In Windows, you can include n domains: standalone users in any number and groups in any number
+
+## Types of access
+
+Each OS determines between which types of access it distinguishes, being able to guarantee or deny them. In Unix, there are three types: read, write and run. The combination of file permissions and the directories that contain them gives more flexibility (but little more)
+
+### Windows
+
+Basic operations by domain:
+- Control Total
+- Modify
+- Reading and executing
+- Show folder content
+- Read
+- Write
+
+Advanced operations per domain
+- Control Total
+- Browse Folder/Run File
+- List folder/read data
+- reading attributes
+- extended reading attributes
+- create files/write data
+- create folder/append data
+- writing attributes
+- extended writing attributes
+- delete files/folders
+- Remove
+- reading permissions
+- change permits
+- take possession
+
+## Capabilities
+
+**Access control mechanism with capabilities**. When a customer makes a request about a resource:
+- The client presents the capacity over the resource
+- The OS (protection mechanism) checks the capacity for the requested operation. Analog to cinema entry
+- No ACL or similar should be accessed
+
+![[Pasted image 20240418133822.png]]
+
+
+# Malware
+
+There're many types of malware:
+- Trojan horses
+- Viruses, worms, bacteria, ...
+- Rootkits
+- Logic bombs, traps, back doors, ...
+
+Against them, there are several techniques that can be used:
+- Firewalls
+- Antivirus
+- Jailing
+- IDS (Intrusion Detection Systems)
+- User education:
+	- Signed programs
+	- Opening file attachments
+	- ...
